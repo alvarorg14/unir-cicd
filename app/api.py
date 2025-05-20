@@ -61,7 +61,7 @@ def sqrt(op):
     try:
         num = util.convert_to_number(op)
         return ("{}".format(CALCULATOR.sqrt(num)), http.client.OK, HEADERS)
-    except (TypeError, ValueError) as e:
+    except TypeError as e:
         return (str(e), http.client.BAD_REQUEST, HEADERS)
 
 @api_application.route("/calc/log10/<op>", methods=["GET"])
@@ -69,5 +69,5 @@ def log10(op):
     try:
         num = util.convert_to_number(op)
         return ("{}".format(CALCULATOR.log10(num)), http.client.OK, HEADERS)
-    except (TypeError, ValueError) as e:
+    except TypeError as e:
         return (str(e), http.client.BAD_REQUEST, HEADERS)
