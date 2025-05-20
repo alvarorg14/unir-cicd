@@ -37,14 +37,14 @@ class Calculator:
         if not isinstance(x, (int, float)):
             raise TypeError("Parameter must be a number")
         if x < 0:
-            raise ValueError("Cannot calculate square root of a negative number")
+            raise TypeError("Cannot calculate square root of a negative number")
         return math.sqrt(x)
 
     def log10(self, x):
         if not isinstance(x, (int, float)):
             raise TypeError("Parameter must be a number")
         if x <= 0:
-            raise ValueError("Logarithm only defined for positive numbers")
+            raise TypeError("Logarithm only defined for positive numbers")
         return math.log10(x)
 
     def check_types(self, x, y):
