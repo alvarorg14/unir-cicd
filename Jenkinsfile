@@ -15,6 +15,8 @@ pipeline {
                 echo 'Building stage!'
 
                 sh 'make build'
+                // Force an error
+                sh 'exit 1'
             }
         }
 
