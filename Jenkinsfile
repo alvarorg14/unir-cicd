@@ -45,9 +45,27 @@ pipeline {
 
     post {
         always {
-            junit 'results/**/*.xml'
-
+            // Publish test results
+            junit testResults: 'results/*.xml', allowEmptyResults: true
+            
+            // Clean workspace
             cleanWs()
+        }
+        failure {
+            emailext (
+                subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
+                body: """
+                    Pipeline failed!
+                    
+                    Job: ${env.JOB_NAME}
+                    Build Number: ${env.BUILD_NUMBER}
+                    Build URL: ${env.BUILD_URL}
+                    Failed Stage: ${currentBuild.currentResult}
+                    
+                    Please check the Jenkins console output for more details.
+                """,
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
         }
     }
 }
