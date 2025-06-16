@@ -37,6 +37,7 @@
         <div>
           <button id="button-add" v-on:click="add()">+</button>
           <button id="button-substract" v-on:click="substract()">-</button>
+          <button id="button-multiply" v-on:click="multiply()">×</button>
         </div>
         <div id="result-area">Result: {{ result }}</div>
         <div>
@@ -62,6 +63,9 @@
           },
           substract: function () {
             this.apiCall("substract", this.op1, this.op2);
+          },
+          multiply: function () {
+            this.apiCall("multiply", this.op1, this.op2);
           },
           apiCall: function (func, op1, op2) {
             var url = `${baseUrl}/calc/${func}/${op1}/${op2}`;

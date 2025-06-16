@@ -33,18 +33,18 @@ context('Calc', () => {
   })
 
   it('can click substract (using fixture)', () => {
-    cy.fixture('result8.txt').as('result')
-    cy.server()
-    cy.route('GET', 'calc/substract/4/-4', '@result').as('getResult')
+    cy.fixture('result8.txt').then((result) => {
+      cy.intercept('GET', '**/calc/substract/4/-4', result).as('getResult')
 
-    cy.get('#in-op1').clear().type('4')
-    cy.get('#in-op2').clear().type('-4')
-    cy.get('#button-substract').click()
+      cy.get('#in-op1').clear().type('4')
+      cy.get('#in-op2').clear().type('-4')
+      cy.get('#button-substract').click()
 
-    cy.wait('@getResult')
+      cy.wait('@getResult')
 
-    cy.get('#result-area').should('have.text', "Result: 8")
-    cy.screenshot()
+      cy.get('#result-area').should('have.text', "Result: 8")
+      cy.screenshot()
+    })
   })
 
   it('increases the history log', () => {

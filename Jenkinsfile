@@ -38,7 +38,7 @@ pipeline {
             steps {
                 sh 'make test-e2e'
 
-                archiveArtifacts artifacts: 'results/e2e/*.xml', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'results/cypress_result.xml', allowEmptyArchive: true
             }
         }
     }
