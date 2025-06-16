@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh 'make test-unit'
 
-                archiveArtifacts artifacts: 'results/unit/*.xml', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'results/unit_result.xml', allowEmptyArchive: true
             }
         }
 
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh 'make test-api'
 
-                archiveArtifacts artifacts: 'results/api/*.xml', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'results/api_result.xml', allowEmptyArchive: true
             }
         }
 
