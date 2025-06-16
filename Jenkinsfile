@@ -15,8 +15,6 @@ pipeline {
                 echo 'Building stage!'
 
                 sh 'make build'
-                // Force an error
-                sh 'exit 1'
             }
         }
 
@@ -54,6 +52,17 @@ pipeline {
             cleanWs()
         }
         failure {
+            echo """
+                Pipeline failed!
+                
+                Job: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+                Build URL: ${env.BUILD_URL}
+                Failed Stage: ${currentBuild.currentResult}
+                
+                Please check the Jenkins console output for more details.
+            """
+            /* Commented out email notification
             emailext (
                 subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                 body: """
@@ -68,6 +77,7 @@ pipeline {
                 """,
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
+            */
         }
     }
 }
