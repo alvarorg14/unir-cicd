@@ -45,10 +45,8 @@ pipeline {
 
     post {
         always {
-            // Publish test results
             junit testResults: 'results/*.xml', allowEmptyResults: true
             
-            // Clean workspace
             cleanWs()
         }
         failure {
@@ -62,7 +60,7 @@ pipeline {
                 
                 Please check the Jenkins console output for more details.
             """
-            /* Commented out email notification
+            /*
             emailext (
                 subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                 body: """
